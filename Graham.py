@@ -15,7 +15,8 @@ def polar_cmp(p0,p1,p2):
 
 def run(data,upperX,upperY):
     ch=[]
-    firstP,ind=fh.min_point(data,upperX,upperY)
+    firstP=min(data)
+    ind=data.index(firstP)
     data[0],data[ind]=data[ind],data[0]
     #sort_point=sorted(data[1:],key=lambda p1,p2:(polar_cmp(firstP,p1,p2)))
     #sort_point=sorted(data[1:],key=lambda p1:direction2(firstP,p1))

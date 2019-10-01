@@ -2,11 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 import Graham 
+import Jarvis as Jarvis
 
 lowerX=0
 lowerY=0
-upperX=100
-upperY=100
+upperX=20
+upperY=20
 
 def fillData(d,n):
     for i in range(n):
@@ -34,6 +35,7 @@ def plotGraphic(data,ch):
 
 if __name__ == "__main__":
     data=[]
-    fillData(data,100)
+    fillData(data,10)
     #data=sorted(data,key=lambda k:k[::-1])
-    print(plotGraphic(data,Graham.run(data,upperX,upperY)))
+    plotGraphic(data,Graham.run(data,upperX,upperY))
+    plotGraphic(data,Jarvis.run(data))
