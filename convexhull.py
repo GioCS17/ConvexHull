@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 import Graham 
-import Jarvis as Jarvis
+import Jarvis 
+import QuickHull
 
 lowerX=0
 lowerY=0
@@ -15,7 +16,7 @@ def fillData(d,n):
         datay=random.randint(lowerY+5,upperY-5)
         d.append((datax,datay))
 
-def plotGraphic(data,ch):
+def plotGraphic(data,ch,name):
 
     datax=[x[0] for x in data]
     datay=[x[1] for x in data]
@@ -29,7 +30,7 @@ def plotGraphic(data,ch):
     plt.xlabel('x label')
     plt.ylabel('y label')
 
-    plt.title('First Simple Plot')
+    plt.title('First Simple Plot - '+name)
     plt.show()
 
 
@@ -37,5 +38,6 @@ if __name__ == "__main__":
     data=[]
     fillData(data,10)
     #data=sorted(data,key=lambda k:k[::-1])
-    plotGraphic(data,Graham.run(data,upperX,upperY))
-    plotGraphic(data,Jarvis.run(data))
+    plotGraphic(data,Graham.run(data,upperX,upperY),'Graham')
+    plotGraphic(data,Jarvis.run(data),'Jarvis')
+    plotGraphic(data,QuickHull.run(data),'Quick Hull')

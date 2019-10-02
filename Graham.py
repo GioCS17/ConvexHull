@@ -18,20 +18,24 @@ def run(data,upperX,upperY):
     firstP=min(data)
     ind=data.index(firstP)
     data[0],data[ind]=data[ind],data[0]
-    #sort_point=sorted(data[1:],key=lambda p1,p2:(polar_cmp(firstP,p1,p2)))
-    #sort_point=sorted(data[1:],key=lambda p1:direction2(firstP,p1))
-    pointsl=[x for x in data[1:] if x[0]<firstP[0]]
-    pointsE=[x for x in data[1:] if x[0]==firstP[0]]
-    pointsR=[x for x in data[1:] if x[0]>firstP[0]]
-    pointsl=sorted(pointsl,key=lambda p: fh.slope(p, firstP))
-    pointsR=sorted(pointsR,key=lambda p: fh.slope(p, firstP))
-    sort_point=pointsR+pointsE+pointsl
+    sort_point=sorted(data[1:],key=lambda p:fh.slope(p,data[0]))
     
     to_remove=[]
     for i in range(len(sort_point)-1):
-        d=fh.direction(firstP,sort_point[i],sort_point[i+1])
-        if d==0:
-            to_remove.append(i)
+        j=i
+        k=i+1
+        d=fh.direction(firstP,sort_point[j],sort_point[k])
+        while d==0:
+            if fh.distance(firstP,sort_point[j])<fh.distance(firstP,sort_point[k]):
+                to_remove.append(j)
+                j+=1
+            else:
+                to_remove.append(k)
+            k+=1
+            if k>=len(sort_point):
+                break
+            d=fh.direction(firstP,sort_point[j],sort_point[k])
+        i=k
         
     last_array=[sort_point[x] for x in range(len(sort_point)) if x not in to_remove]
 
